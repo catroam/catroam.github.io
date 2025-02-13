@@ -1,26 +1,32 @@
-const mainImage = document.getElementById('main-image');
-const popup = document.getElementById('popup');
-const closeBtn = document.getElementById('close-btn');
-const music = document.getElementById('music');
+document.addEventListener('DOMContentLoaded', () => {
+    const mainImage = document.getElementById('main-image');
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('close-btn');
+    const music = document.getElementById('music');
 
-// Открываем попап и включаем музыку при клике на изображение
-mainImage.addEventListener('click', () => {
-    popup.style.display = 'flex'; // Показываем попап
-    music.play(); // Воспроизводим музыку
-});
+    if (mainImage && popup && closeBtn && music) {
+        mainImage.addEventListener('click', () => {
+            popup.style.display = 'flex';
+            music.volume = 0.3;
+            music.play().catch(error => {
+                console.error("Ошибка воспроизведения аудио:", error);
+            });
+        });
 
-// Закрываем попап и останавливаем музыку при клике на кнопку закрытия
-closeBtn.addEventListener('click', () => {
-    popup.style.display = 'none'; // Скрываем попап
-    music.pause(); // Останавливаем музыку
-    music.currentTime = 0; // Сбрасываем воспроизведение в начало
-});
+        closeBtn.addEventListener('click', () => {
+            popup.style.display = 'none';
+            music.pause();
+            music.currentTime = 0;
+        });
 
-// Закрываем попап при клике вне его области
-window.addEventListener('click', (event) => {
-    if (event.target === popup) {
-        popup.style.display = 'none';
-        music.pause();
-        music.currentTime = 0;
+        window.addEventListener('click', (event) => {
+            if (event.target === popup) {
+                popup.style.display = 'none';
+                music.pause();
+                music.currentTime = 0;
+            }
+        });
+    } else {
+        console.error("Один из элементов не найден!");
     }
 });
