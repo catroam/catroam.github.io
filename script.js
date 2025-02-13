@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mainImage && popup && closeBtn && music) {
         mainImage.addEventListener('click', () => {
             popup.style.display = 'flex';
-            music.volume = 0.3;
+            music.volume = 0.1;
             music.play().catch(error => {
-                console.error("Ошибка воспроизведения аудио:", error);
+                console.error("Audio error: ", error);
             });
         });
 
@@ -27,6 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     } else {
-        console.error("Один из элементов не найден!");
+        console.error("Element not found!");
     }
 });
